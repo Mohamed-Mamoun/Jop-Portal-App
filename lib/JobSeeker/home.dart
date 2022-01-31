@@ -100,54 +100,7 @@ class _HomeState extends State<Home> {
           },
         ),
 
-        /*
-        SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 2, right: 70, top: 20),
-                child: Text('Find your perfect job',
-                    style: GoogleFonts.lato(
-                        textStyle: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.w700))),
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15),
-                child: TextField(
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    hintText: 'What are you looking for?',
-                    hintStyle: GoogleFonts.lato(
-                      textStyle: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    filled: true,
-                    fillColor: Color(0xffedeff1),
-                    prefixIcon: Icon(Icons.search, color: Colors.black),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 5, right: 180),
-                child: Text(
-                  'Recently Posted',
-                  style: GoogleFonts.lato(
-                      fontSize: 24, fontWeight: FontWeight.w700),
-                ),
-              ),
-              Container(
-                child: 
-              ),
-            ],
-          ),
-        ),*/
+      
       ),
     );
   }

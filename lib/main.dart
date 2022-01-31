@@ -1,14 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jop_portal/Styles/style.dart';
-import 'package:jop_portal/first_page.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:jop_portal/onbording.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MaterialApp(home: OnBoardingScreen()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -29,7 +28,7 @@ class _MyAppState extends State<MyApp> {
           width: 500,
           
         ),
-        nextScreen: First_Page(),
+        nextScreen: OnBoardingScreen(),
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: primaryColor,
         duration: 3000,

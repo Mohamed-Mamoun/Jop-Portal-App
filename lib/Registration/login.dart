@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:jop_portal/Components/Components.dart';
 import 'package:jop_portal/Navigation/E_bottomnav.dart';
 import 'package:jop_portal/Navigation/J_bottomnavbar.dart';
 import 'package:jop_portal/Styles/style.dart';
@@ -32,11 +33,9 @@ class _Login_pageState extends State<Login_page> {
         .get());
     var data = users.data();
     if (data!['role'] == 'employer') {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => E_Bottumnav()));
+     navigateAndFinish(context, E_Bottumnav());
     } else {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => j_bottomnavbar()));
+      navigateAndFinish(context, j_bottomnavbar());
     }
   }
 

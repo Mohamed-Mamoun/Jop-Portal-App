@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jop_portal/Components/Components.dart';
 import 'package:jop_portal/Registration/Employer_singup.dart';
 import 'package:jop_portal/Registration/jobSeeker_singup.dart';
 import 'package:jop_portal/Registration/login.dart';
@@ -25,12 +26,12 @@ class First_Page extends StatelessWidget {
             ),
             ),
             Container(
-              height: 120, width: 250, margin: EdgeInsets.only(top: 20, left: 80),
-              decoration: BoxDecoration(
-                /*
-                image: DecorationImage(image: AssetImage('assests/images/logo.png'),
-                fit: BoxFit.cover*/
+              height: 200, width: 250, margin: EdgeInsets.only(top: 20, left: 80),
+              decoration: BoxDecoration( 
+                image: DecorationImage(image: AssetImage('assests/Logo.jpeg'),
+                fit: BoxFit.cover
                 )
+              )
               ),
             
             Padding(padding: EdgeInsets.fromLTRB(80, 20, 0, 0),
@@ -42,8 +43,7 @@ class First_Page extends StatelessWidget {
             ),
             Padding(padding: EdgeInsets.fromLTRB(80, 20, 0, 0),
             child: ElevatedButton(onPressed: (){
-              Navigator.push(context, 
-                      MaterialPageRoute(builder: (context)=> Employer_SingUp()));
+              navigateTo(context, Employer_SingUp());
             
             }, 
             
@@ -67,8 +67,7 @@ class First_Page extends StatelessWidget {
             ),
              Padding(padding: EdgeInsets.fromLTRB(80, 20, 0, 0),
             child: ElevatedButton(onPressed: (){
-              Navigator.push(context, 
-                      MaterialPageRoute(builder: (context)=> JobSeeker_SignUp()));
+            navigateTo(context, JobSeeker_SignUp());
             }, 
             child: Text('Job Seeker',
             style: TextStyle(fontSize: 22, fontStyle: FontStyle.italic),
@@ -82,8 +81,7 @@ class First_Page extends StatelessWidget {
             ),
             Padding(padding: EdgeInsets.fromLTRB(80, 40, 0, 0),
             child: TextButton(onPressed: (){
-              Navigator.push(context, 
-                      MaterialPageRoute(builder: (context)=> Login_page()));
+             navigateTo(context, Login_page());
             },
              child: Text('Already Have an account?',
                style: TextStyle(

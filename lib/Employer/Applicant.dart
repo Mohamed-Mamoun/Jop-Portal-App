@@ -65,7 +65,7 @@ class _ApplicantState extends State<Applicant> {
                  Row(
                    children: [
                      IconButton(onPressed: (){
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=>E_Bottumnav()));
+                       Navigator.pop(context);
                      }, icon: Icon(Icons.arrow_back_ios),
                      color: Colors.white,
                      )

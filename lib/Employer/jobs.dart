@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jop_portal/Components/Components.dart';
 import 'package:jop_portal/Employer/new_Job.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jop_portal/Styles/style.dart';
@@ -189,8 +190,7 @@ class _JobsState extends State<Jobs> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => New_job()));
+            navigateTo(context, New_job());
           },
           child: Icon(
             Icons.add,

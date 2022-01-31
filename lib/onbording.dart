@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jop_portal/Components/Components.dart';
 import 'package:jop_portal/Styles/style.dart';
 import 'package:jop_portal/first_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -67,7 +68,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         elevation: 0.0,
         actions: [
           TextButton(onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => First_Page()));
+              navigateTo(context, First_Page());
           }, child: Text('SKIP'),
           )
         ],

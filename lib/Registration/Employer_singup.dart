@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:jop_portal/Components/Components.dart';
 import 'package:jop_portal/Registration/login.dart';
 import 'package:jop_portal/Styles/style.dart';
 
@@ -202,10 +203,7 @@ class _Employer_SingUpState extends State<Employer_SingUp> {
                               'company_industry': _indus.text,
                               'role': 'employer'
                             }),
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Login_page()))
+                            navigateTo(context, Login_page())
                           });
                 } on FirebaseAuthException catch (e) {
                   return print(e);

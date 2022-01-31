@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jop_portal/Components/Components.dart';
 import 'package:jop_portal/Registration/login.dart';
 import 'package:jop_portal/Styles/style.dart';
 import 'package:jop_portal/auth_service.dart';
@@ -204,10 +205,7 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
                               'phone_number': _number.text,
                               'role': 'job_seeker'
                             }),
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Login_page()))
+                           navigateTo(context, Login_page())
                           });
                 } on FirebaseAuthException catch (e) {
                   return print(e);

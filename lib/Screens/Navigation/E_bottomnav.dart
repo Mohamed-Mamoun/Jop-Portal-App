@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:jop_portal/Employer/Applicant.dart';
-import 'package:jop_portal/Employer/E_freelancing.dart';
-import 'package:jop_portal/Employer/E_profile.dart';
-import 'package:jop_portal/Employer/jobs.dart';
-import 'package:jop_portal/Navigation/TabBar.dart';
-import 'package:jop_portal/Styles/style.dart';
+import 'package:jop_portal/Components/Styles/style.dart';
+import 'package:jop_portal/Screens/Employer/Applicant.dart';
+import 'package:jop_portal/Screens/Employer/E_freelancing.dart';
+import 'package:jop_portal/Screens/Employer/E_profile.dart';
+import 'package:jop_portal/Screens/Employer/jobs.dart';
+import 'package:jop_portal/Screens/Navigation/TabBar.dart';
+
 
 class E_Bottumnav extends StatefulWidget {
   const E_Bottumnav({Key? key}) : super(key: key);

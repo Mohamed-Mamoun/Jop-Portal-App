@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:jop_portal/Components/Components.dart';
-import 'package:jop_portal/Registration/Employer_singup.dart';
-import 'package:jop_portal/Registration/jobSeeker_singup.dart';
-import 'package:jop_portal/Registration/login.dart';
-import 'package:jop_portal/Styles/style.dart';
-import 'package:path/path.dart';
+import 'package:jop_portal/Components/Styles/style.dart';
+import 'Registration/Employer_singup.dart';
+import 'Registration/jobSeeker_singup.dart';
+import 'Registration/login.dart';
+
+
 
 class First_Page extends StatelessWidget {
   const First_Page({ Key? key }) : super(key: key);
@@ -25,6 +26,7 @@ class First_Page extends StatelessWidget {
             ),
             ),
             ),
+            
             Container(
               height: 200, width: 250, margin: EdgeInsets.only(top: 20, left: 80),
               decoration: BoxDecoration( 

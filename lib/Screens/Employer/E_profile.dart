@@ -1,9 +1,12 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jop_portal/Registration/login.dart';
-import 'package:jop_portal/Styles/style.dart';
+import 'package:jop_portal/Components/Components.dart';
+import 'package:jop_portal/Components/Styles/style.dart';
+import 'package:jop_portal/Screens/Registration/login.dart';
 
 class E_Profile extends StatefulWidget {
   const E_Profile({Key? key}) : super(key: key);
@@ -18,11 +21,8 @@ class _E_ProfileState extends State<E_Profile> {
   String userName = '';
   String userinfo = '';
   dynamic file;
-  /* Future<void> _takePicture() async {
-    final imagefile =
-        await ImagePicker.pickImage(source: ImageSource.camera, maxWidth: 600);
-  }
-*/
+  String image = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,15 +33,12 @@ class _E_ProfileState extends State<E_Profile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-                padding: EdgeInsets.only(left: 310),
+                padding: EdgeInsets.only(left: 340, top: 5),
                 child: IconButton(
                   onPressed: () async {
                     try {
                       await auth.signOut();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Login_page()));
+                     navigateAndFinish(context, Login_page());
                     } on FirebaseAuthException catch (e) {
                       print(e);
                     }
@@ -53,22 +50,75 @@ class _E_ProfileState extends State<E_Profile> {
                   ),
                 )),
             Center(
-              child: Container(
-                height: 120,
-                width: 120,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.grey.shade200,
-                      radius: 40.0,
-                    ),
-                    GestureDetector(
-                        //  onTap: pickImage,
-                        child: Icon(Icons.camera_alt))
-                  ],
-                ),
+              child: FutureBuilder(
+                future: _userdata(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Container(
+                      height: 130,
+                      width: 130,
+                      child: CircleAvatar(
+                        child: CircularProgressIndicator(
+                          color: Colors.black,
+                        ),
+                        backgroundColor: Colors.grey.shade200,
+                        radius: 40.0,
+                      ),
+                    );
+                  }
+                  return (image != null)
+                      ? Container(
+                          height: 130,
+                          width: 130,
+                          child: CircleAvatar(
+                            child: Icon(
+                              Icons.person,
+                              size: 110,
+                              color: Colors.black,
+                            ),
+                            backgroundColor: Colors.grey.shade200,
+                            radius: 40.0,
+                          ),
+                        )
+                      : Container(
+                          height: 130,
+                          width: 130,
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage(image),
+                            backgroundColor: Colors.grey.shade200,
+                            radius: 40.0,
+                          ),
+                        );
+                },
               ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: secondaryColor),
+                    onPressed: () => imagePickMethod(),
+                    child: Text(
+                      'Select Image',
+                      style: TextStyle(
+                          color: primaryColor,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18),
+                    )),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: secondaryColor),
+                    onPressed: () => uploudImage(),
+                    child: Text(
+                      'Uploud Image',
+                      style: TextStyle(
+                          color: primaryColor,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18),
+                    )),
+              ],
             ),
             Divider(
               height: 60.0,
@@ -139,7 +189,7 @@ class _E_ProfileState extends State<E_Profile> {
             Card(
               color: Colors.white,
               child: ListTile(
-                leading: Icon(Icons.phone, color: Colors.black),
+                leading: Icon(Icons.home, color: Colors.black),
                 title: FutureBuilder(
                     future: _userdata(),
                     builder: (context, snapshot) {
@@ -181,6 +231,7 @@ class _E_ProfileState extends State<E_Profile> {
                 userEmail = value['company_email'],
                 userName = value['company_name'],
                 userinfo = value['company_industry'],
+                image = value['image'],
               });
     }
   }

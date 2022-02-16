@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:jop_portal/JobSeeker/Freelancing.dart';
-import 'package:jop_portal/JobSeeker/home.dart';
-import 'package:jop_portal/JobSeeker/profile.dart';
-import 'package:jop_portal/Navigation/TabBar.dart';
-import 'package:jop_portal/Styles/style.dart';
+import 'package:jop_portal/Components/Styles/style.dart';
+import 'package:jop_portal/Screens/JobSeeker/Freelancing.dart';
+import 'package:jop_portal/Screens/JobSeeker/home.dart';
+import 'package:jop_portal/Screens/JobSeeker/profile.dart';
+import 'package:jop_portal/Screens/Navigation/TabBar.dart';
+
 
 class j_bottomnavbar extends StatefulWidget {
   const j_bottomnavbar({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jop_portal/Components/Components.dart';
-import 'package:jop_portal/Styles/style.dart';
-import 'package:jop_portal/first_page.dart';
+import 'package:jop_portal/Components/Styles/style.dart';
+import 'package:jop_portal/Screens/first_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 

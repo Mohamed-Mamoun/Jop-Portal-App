@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jop_portal/Components/Components.dart';
-import 'package:jop_portal/Employer/new_Job.dart';
+import 'package:jop_portal/Components/Styles/style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:jop_portal/Styles/style.dart';
+import 'package:jop_portal/Screens/Employer/new_Job.dart';
 
 class Jobs extends StatefulWidget {
   const Jobs({Key? key}) : super(key: key);
@@ -31,6 +31,7 @@ class _JobsState extends State<Jobs> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text('The jobs you offered'),
           automaticallyImplyLeading: false,
           backgroundColor: primaryColor,

@@ -1,53 +1,127 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jop_portal/Styles/style.dart';
+import 'package:jop_portal/Components/Styles/style.dart';
 
-class Freelancing_jobs extends StatefulWidget {
-  Freelancing_jobs({Key? key}) : super(key: key);
+
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
 
   @override
-  _Freelancing_jobsState createState() => _Freelancing_jobsState();
+  _HomeState createState() => _HomeState();
 }
 
-class _Freelancing_jobsState extends State<Freelancing_jobs> {
-  Stream<QuerySnapshot> job = FirebaseFirestore.instance.collection('freelancing').snapshots();
- var freedata;
- var text;
+class _HomeState extends State<Home> {
+  var employerName;
+  var docid;
+  String userEmail='';
+  String userName='';
+  String userNumber='';
+
+
+  FirebaseAuth auth = FirebaseAuth.instance;
+  Stream<QuerySnapshot> jobs =
+      FirebaseFirestore.instance.collection('job').snapshots();
+  String searchkey = '';
+  var applicant = FirebaseFirestore.instance.collection('Applicant');
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: StreamBuilder<QuerySnapshot>(
-          stream: job,
-          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-             if (snapshot.hasError) {
-                return Text('Something went wrong');
-              }
-            if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                    child: CircularProgressIndicator(
-                  strokeWidth: 6,
-                ));
-              }
-            var data = snapshot.requireData;
-            return 
-               ListView.builder(
-                 itemCount: data.size,
-                 itemBuilder: (context, index){
-                return _jobs(data.docs[index]['Name'], data.docs[index]['title'], '', data.docs[index]['description']);
-                 }
-                 );
-          }
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: primaryColor,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          automaticallyImplyLeading: false,
+          title: Container(
+            width: 1000,
+            child: TextField(
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  prefixIcon: Icon(
+                    Icons.search,
+                    size: 30,
+                  ),
+                  hintText: 'Search for a Job',
+                  hintStyle: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                    ),
+                  )),
+              onChanged: (value) {
+                setState(() {
+                  searchkey = value;
+                });
+              },
+            ),
+          ),
         ),
-     
+        body: StreamBuilder<QuerySnapshot>(
+          stream: (searchkey == null || searchkey.trim() == "")
+              ? FirebaseFirestore.instance.collection('job').snapshots()
+              : FirebaseFirestore.instance
+                  .collection('job')
+                  .where('SearchIndex', arrayContains: searchkey)
+                  .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text('Something went wrong');
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                  child: CircularProgressIndicator(
+                strokeWidth: 6,
+              ));
+            }
+            var data = snapshot.requireData;
+            return Column(
+              children: [
+                SizedBox(
+                  height: 15,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: data.size,
+                      itemBuilder: (context, index) {
+                        
+                        return _jobs(
+                            data.docs[index]['name'],
+                            data.docs[index]['job_title'],
+                            'assests/Logo.jpeg',
+                            data.docs[index]['id'],
+                            data.docs[index]['job_desc']);
+                      }),
+                ),
+              ],
+            );
+          },
+        ),
+
       
+      ),
     );
   }
-   _userdata()async{
-    
+    _userdata() async {
+    var currentUser = await auth.currentUser;
+    if (currentUser != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.uid)
+          .get()
+          .then((value) => {
+                userEmail = value['email'],
+                userName = value['name'],
+                userNumber = value['phone_number'],
+              });
+    }
   }
- _jobs(String company_name, String job_title, String imgpath,
-      String job_description) {
+
+  _jobs(String company_name, String job_title, String imgpath,String id,
+      String job_description,) {
     Job_description(BuildContext context) {
       Navigator.push(
         context,
@@ -93,7 +167,7 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
                         width: 100,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(imgpath),
+                            image: NetworkImage(imgpath),
                             fit: BoxFit.fitWidth,
                           ),
                           borderRadius: BorderRadius.all(
@@ -153,9 +227,22 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
                         SizedBox(
                           width: 16,
                         ),
-                        Expanded(
+                        FutureBuilder(
+                          future: _userdata(),
+                          builder: (context, snapshot){
+                          return   Expanded(
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () async{
+                             await applicant.add({
+                                'id': id,
+                                'Name':company_name,
+                                'title':job_title,
+                                'Applicant_Name':userName,
+                                'Applicant_Email':userEmail,
+                                'Applicant_Number':userNumber
+                              });
+                              Navigator.pop(context);
+                            },
                             child: Text(
                               "Apply Now",
                               style: TextStyle(
@@ -168,7 +255,9 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
                                 primary: primaryColor,
                                 padding: EdgeInsets.fromLTRB(50, 15, 50, 15)),
                           ),
-                        ),
+                        );
+                        })
+                      
                       ],
                     ),
                   ],
@@ -190,23 +279,12 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
           height: 85,
           width: 200,
           decoration: BoxDecoration(
-            
-              color: Colors.white, borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-              BoxShadow(
-                color: Colors.grey.shade800,
-                blurRadius: 8,
-                offset: Offset(
-                  5,5
-                )
-                
-              )]
-              ),
+              color: Colors.white, borderRadius: BorderRadius.circular(8)),
           child: Row(
             children: [
               Container(
                 height: 100,
-                width: 100,
+                width: 80,
                 margin: EdgeInsets.fromLTRB(8, 0, 20, 0),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
@@ -236,6 +314,4 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
       ),
     );
   }
-      
-    }
-
+}

@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jop_portal/Components/Components.dart';
-import 'package:jop_portal/Navigation/E_bottomnav.dart';
-import 'package:jop_portal/Navigation/J_bottomnavbar.dart';
-import 'package:jop_portal/Styles/style.dart';
+import 'package:jop_portal/Components/Styles/style.dart';
+import 'package:jop_portal/Screens/Navigation/E_bottomnav.dart';
+import 'package:jop_portal/Screens/Navigation/J_bottomnavbar.dart';
 
-import 'package:jop_portal/first_page.dart';
+import 'package:jop_portal/Screens/first_page.dart';
+import 'package:jop_portal/Services/Auth_services.dart';
+import 'package:provider/provider.dart';
 
 class Login_page extends StatefulWidget {
   const Login_page({Key? key}) : super(key: key);
@@ -17,23 +19,17 @@ class Login_page extends StatefulWidget {
 }
 
 class _Login_pageState extends State<Login_page> {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _pass = TextEditingController();
-
-  User? user = FirebaseAuth.instance.currentUser;
-
-  FirebaseAuth auth = FirebaseAuth.instance;
-  final formKey = GlobalKey<FormState>();
+  TextEditingController email = TextEditingController();
+  TextEditingController pass = TextEditingController();
   
+  final formKey = GlobalKey<FormState>();
 
-  getUserRole(value) async {
-    var users = await (FirebaseFirestore.instance
-        .collection('users')
-        .doc(value.user!.uid)
-        .get());
+  Future getUserRole(value) async {
+    var users =
+        await (FirebaseFirestore.instance.collection('users').doc(value.user!.uid).get());
     var data = users.data();
     if (data!['role'] == 'employer') {
-     navigateAndFinish(context, E_Bottumnav());
+      navigateAndFinish(context, E_Bottumnav());
     } else {
       navigateAndFinish(context, j_bottomnavbar());
     }
@@ -41,6 +37,7 @@ class _Login_pageState extends State<Login_page> {
 
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<Auth_Service>(context);
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
@@ -82,7 +79,7 @@ class _Login_pageState extends State<Login_page> {
                         padding: EdgeInsets.only(left: 40, right: 30),
                         child: TextFormField(
                           keyboardType: TextInputType.name,
-                          controller: _email,
+                          controller: email,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Please Enter Your Email address";
@@ -120,7 +117,7 @@ class _Login_pageState extends State<Login_page> {
                         child: TextFormField(
                           obscureText: true,
                           keyboardType: TextInputType.name,
-                          controller: _pass,
+                          controller: pass,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Please Enter Your Password";
@@ -148,11 +145,7 @@ class _Login_pageState extends State<Login_page> {
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
                       try {
-                        await auth
-                            .signInWithEmailAndPassword(
-                                email: _email.text.trim(),
-                                password: _pass.text.trim())
-                            .then((value) => {getUserRole(value)});
+                       auth.login(email, pass, context);
                             
                       } on FirebaseAuthException catch (e) {
                        final snackbsr = SnackBar(content: Text('Email or Password is not correct'));

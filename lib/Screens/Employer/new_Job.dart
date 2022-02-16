@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:jop_portal/Styles/style.dart';
+import 'package:jop_portal/Components/Styles/style.dart';
 
 class New_job extends StatefulWidget {
   const New_job({Key? key}) : super(key: key);

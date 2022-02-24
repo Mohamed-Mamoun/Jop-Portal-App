@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:jop_portal/Components/Styles/style.dart';
 import 'package:jop_portal/Screens/JobSeeker/addProject.dart';
+import 'package:jop_portal/helpers/Styles/style.dart';
 
 class Freelancing extends StatefulWidget {
   const Freelancing({ Key? key }) : super(key: key);

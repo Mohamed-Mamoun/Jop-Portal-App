@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jop_portal/Components/Components.dart';
-import 'package:jop_portal/Components/Styles/style.dart';
+import 'package:jop_portal/helpers/Components.dart';
+import 'package:jop_portal/helpers/Styles/style.dart';
 import 'Registration/Employer_singup.dart';
 import 'Registration/jobSeeker_singup.dart';
 import 'Registration/login.dart';

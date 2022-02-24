@@ -1,13 +1,9 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jop_portal/Components/Components.dart';
-import 'package:jop_portal/Components/Styles/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:jop_portal/Screens/Registration/login.dart';
 import 'package:jop_portal/Services/Auth_services.dart';
+import 'package:jop_portal/helpers/Styles/style.dart';
 import 'package:provider/provider.dart';
 
 class JobSeeker_SignUp extends StatefulWidget {

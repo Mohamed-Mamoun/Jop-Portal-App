@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jop_portal/Components/Styles/style.dart';
-import 'package:jop_portal/Screens/JobSeeker/Freelancing.dart';
 import 'package:jop_portal/Screens/JobSeeker/home.dart';
 import 'package:jop_portal/Screens/JobSeeker/profile.dart';
 import 'package:jop_portal/Screens/Navigation/TabBar.dart';
+import 'package:jop_portal/helpers/Styles/style.dart';
 
 
 class j_bottomnavbar extends StatefulWidget {

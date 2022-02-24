@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:jop_portal/helpers/Styles/style.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 File? _image;
@@ -61,3 +62,30 @@ void navigateAndFinish(BuildContext context, page) {
       context, MaterialPageRoute(builder: (context) => page));
 }
 
+Widget defaultButton({
+  double width = double.infinity,
+  Color background= primaryColor,
+  bool isUpperCase = true,
+  double radius = 0.0,
+  required Function function,
+  required String text,
+}) =>
+    Container(
+      width: width,
+      height: 50.0,
+      child: MaterialButton(
+        onPressed:() => function,
+        child: Text(
+          isUpperCase ? text.toUpperCase() : text,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(radius),
+        color: background,
+      ),
+    );

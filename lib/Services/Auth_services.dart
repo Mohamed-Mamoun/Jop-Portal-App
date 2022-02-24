@@ -1,15 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:jop_portal/Components/Components.dart';
+import 'package:flutter/material.dart';
 import 'package:jop_portal/Screens/Navigation/E_bottomnav.dart';
 import 'package:jop_portal/Screens/Navigation/J_bottomnavbar.dart';
 import 'package:jop_portal/Screens/Registration/login.dart';
+import 'package:jop_portal/helpers/Components.dart';
 
 class Auth_Service {
   final auth = FirebaseAuth.instance;
   User? user = FirebaseAuth.instance.currentUser;
   final firestore = FirebaseFirestore.instance;
+  IconData suffix = Icons.visibility_outlined;
+  bool isPassword = true;
+
+  // **************************************************
+  // Creating a Function To Change The Password Show
+  void changePassword() {
+    suffix =
+        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+    isPassword = !isPassword;
+  }
 
   // **************************************************
   // Getting The User Role from Firestore

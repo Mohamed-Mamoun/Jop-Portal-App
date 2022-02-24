@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jop_portal/Components/Styles/style.dart';
 import 'package:jop_portal/Screens/JobSeeker/Freelancing.dart';
 import 'package:jop_portal/Screens/freelancing_jobs.dart';
+import 'package:jop_portal/helpers/Styles/style.dart';
 
 class tabbar extends StatefulWidget {
   const tabbar({Key? key}) : super(key: key);

@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jop_portal/Screens/Navigation/E_bottomnav.dart';
 import 'package:jop_portal/Screens/Navigation/J_bottomnavbar.dart';
-
 import 'package:jop_portal/Screens/first_page.dart';
 import 'package:jop_portal/Services/Auth_services.dart';
 import 'package:jop_portal/helpers/Components.dart';
@@ -29,9 +28,9 @@ class _Login_pageState extends State<Login_page> {
         await (FirebaseFirestore.instance.collection('users').doc(value.user!.uid).get());
     var data = users.data();
     if (data!['role'] == 'employer') {
-      navigateAndFinish(context, E_Bottumnav());
+      navigateAndFinish(context, const E_Bottumnav());
     } else {
-      navigateAndFinish(context, j_bottomnavbar());
+      navigateAndFinish(context, const j_bottomnavbar());
     }
   }
 
@@ -41,12 +40,13 @@ class _Login_pageState extends State<Login_page> {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: primaryColor,
         centerTitle: true,
         title: Text(
           'Login',
           style: GoogleFonts.lato(
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
                 color: Colors.white, fontSize: 22, fontStyle: FontStyle.italic),
           ),
         ),
@@ -54,7 +54,7 @@ class _Login_pageState extends State<Login_page> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 170,
             ),
             Form(
@@ -62,7 +62,7 @@ class _Login_pageState extends State<Login_page> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(right: 180),
+                      padding: const EdgeInsets.only(right: 180),
                       child: Text(
                         'Email Address:',
                         style: GoogleFonts.lato(
@@ -72,11 +72,11 @@ class _Login_pageState extends State<Login_page> {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Padding(
-                        padding: EdgeInsets.only(left: 40, right: 30),
+                        padding: const EdgeInsets.only(left: 40, right: 30),
                         child: TextFormField(
                           keyboardType: TextInputType.name,
                           controller: email,
@@ -86,20 +86,20 @@ class _Login_pageState extends State<Login_page> {
                             }
                           },
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.email),
+                              prefixIcon: const Icon(Icons.email),
                               hintText: ' Email',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 18,
                               ),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8))),
                         )),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(right: 210),
+                      padding: const EdgeInsets.only(right: 210),
                       child: Text(
                         'Password:',
                         style: GoogleFonts.lato(
@@ -109,11 +109,11 @@ class _Login_pageState extends State<Login_page> {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Padding(
-                        padding: EdgeInsets.only(left: 40, right: 30),
+                        padding: const EdgeInsets.only(left: 40, right: 30),
                         child: TextFormField(
                           obscureText: true,
                           keyboardType: TextInputType.name,
@@ -124,9 +124,9 @@ class _Login_pageState extends State<Login_page> {
                             }
                           },
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock),
+                              prefixIcon: const Icon(Icons.lock),
                               hintText: 'Password',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 18,
                               ),
@@ -135,7 +135,7 @@ class _Login_pageState extends State<Login_page> {
                         )),
                   ],
                 )),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
@@ -148,7 +148,7 @@ class _Login_pageState extends State<Login_page> {
                        auth.login(email, pass, context);
                             
                       } on FirebaseAuthException catch (e) {
-                       final snackbsr = SnackBar(content: Text('Email or Password is not correct'));
+                       const snackbsr = SnackBar(content: Text('Email or Password is not correct'));
                        ScaffoldMessenger.of(context).showSnackBar(snackbsr);
                       }
                     }
@@ -156,7 +156,7 @@ class _Login_pageState extends State<Login_page> {
                   child: Text(
                     'Login',
                     style: GoogleFonts.lato(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,
                           fontStyle: FontStyle.italic),
@@ -164,21 +164,21 @@ class _Login_pageState extends State<Login_page> {
                   ),
                   style: ElevatedButton.styleFrom(
                       primary: primaryColor,
-                      padding: EdgeInsets.fromLTRB(20, 12, 20, 12)),
+                      padding: const EdgeInsets.fromLTRB(20, 12, 20, 12)),
                 ),
               ],
             ),
             Padding(
-                padding: EdgeInsets.only(top: 15),
+                padding: const EdgeInsets.only(top: 15),
                 child: TextButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => First_Page()));
+                        MaterialPageRoute(builder: (context) => const First_Page()));
                   },
                   child: Text(
                     'Create New account',
                     style: GoogleFonts.lato(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                       fontSize: 22,
                     )),
                   ),

@@ -4,26 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jop_portal/helpers/Styles/style.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class Art extends StatefulWidget {
+  const Art({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _ArtState createState() => _ArtState();
 }
 
-class _HomeState extends State<Home> {
-  var employerName;
-  var docid;
+class _ArtState extends State<Art> {
+  String searchkey = '';
   String userEmail = '';
   String userName = '';
   String userNumber = '';
-
   var applicant = FirebaseFirestore.instance.collection('Applicant');
   FirebaseAuth auth = FirebaseAuth.instance;
-  Stream<QuerySnapshot> jobs =
-      FirebaseFirestore.instance.collection('job').snapshots();
-  String searchkey = '';
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,7 +25,10 @@ class _HomeState extends State<Home> {
         backgroundColor: primaryColor,
         body: StreamBuilder<QuerySnapshot>(
           stream: (searchkey == null || searchkey.trim() == "")
-              ? FirebaseFirestore.instance.collection('job').snapshots()
+              ? FirebaseFirestore.instance
+                  .collection('job')
+                  .where('Field', isEqualTo: 'Education')
+                  .snapshots()
               : FirebaseFirestore.instance
                   .collection('job')
                   .where('SearchIndex', arrayContains: searchkey)

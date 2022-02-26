@@ -4,26 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jop_portal/helpers/Styles/style.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class Education extends StatefulWidget {
+  const Education({ Key? key }) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  State<Education> createState() => _EducationState();
 }
 
-class _HomeState extends State<Home> {
-  var employerName;
-  var docid;
-  String userEmail = '';
-  String userName = '';
-  String userNumber = '';
-
-  var applicant = FirebaseFirestore.instance.collection('Applicant');
+class _EducationState extends State<Education> {
+String searchkey = '';
+String userEmail='';
+  String userName='';
+  String userNumber='';
+var applicant = FirebaseFirestore.instance.collection('Applicant');
   FirebaseAuth auth = FirebaseAuth.instance;
-  Stream<QuerySnapshot> jobs =
-      FirebaseFirestore.instance.collection('job').snapshots();
-  String searchkey = '';
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,7 +25,7 @@ class _HomeState extends State<Home> {
         backgroundColor: primaryColor,
         body: StreamBuilder<QuerySnapshot>(
           stream: (searchkey == null || searchkey.trim() == "")
-              ? FirebaseFirestore.instance.collection('job').snapshots()
+              ? FirebaseFirestore.instance.collection('job').where('Field',isEqualTo: 'Education').snapshots()
               : FirebaseFirestore.instance
                   .collection('job')
                   .where('SearchIndex', arrayContains: searchkey)
@@ -43,7 +37,7 @@ class _HomeState extends State<Home> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                   child: CircularProgressIndicator(
-                color: Colors.white,
+                    color: Colors.white,
                 strokeWidth: 6,
               ));
             }
@@ -57,6 +51,7 @@ class _HomeState extends State<Home> {
                   child: ListView.builder(
                       itemCount: data.size,
                       itemBuilder: (context, index) {
+                        
                         return _jobs(
                             data.docs[index]['name'],
                             data.docs[index]['job_title'],
@@ -69,11 +64,13 @@ class _HomeState extends State<Home> {
             );
           },
         ),
+
+      
       ),
     );
   }
 
-  _userdata() async {
+    _userdata() async {
     var currentUser = await auth.currentUser;
     if (currentUser != null) {
       await FirebaseFirestore.instance
@@ -88,13 +85,8 @@ class _HomeState extends State<Home> {
     }
   }
 
-  _jobs(
-    String company_name,
-    String job_title,
-    String imgpath,
-    String id,
-    String job_description,
-  ) {
+  _jobs(String company_name, String job_title, String imgpath,String id,
+      String job_description,) {
     Job_description(BuildContext context) {
       Navigator.push(
         context,
@@ -123,7 +115,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             body: Container(
-              decoration: const BoxDecoration(
+              decoration:  const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50),
@@ -201,36 +193,36 @@ class _HomeState extends State<Home> {
                           width: 16,
                         ),
                         FutureBuilder(
-                            future: _userdata(),
-                            builder: (context, snapshot) {
-                              return Expanded(
-                                child: ElevatedButton(
-                                  onPressed: () async {
-                                    await applicant.add({
-                                      'id': id,
-                                      'Name': company_name,
-                                      'title': job_title,
-                                      'Applicant_Name': userName,
-                                      'Applicant_Email': userEmail,
-                                      'Applicant_Number': userNumber
-                                    });
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text(
-                                    "Apply Now",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                      primary: primaryColor,
-                                      padding: const EdgeInsets.fromLTRB(
-                                          50, 15, 50, 15)),
-                                ),
-                              );
-                            })
+                          future: _userdata(),
+                          builder: (context, snapshot){
+                          return   Expanded(
+                          child: ElevatedButton(
+                            onPressed: () async{
+                             await applicant.add({
+                                'id': id,
+                                'Name':company_name,
+                                'title':job_title,
+                                'Applicant_Name':userName,
+                                'Applicant_Email':userEmail,
+                                'Applicant_Number':userNumber
+                              });
+                              Navigator.pop(context);
+                            },
+                            child: const Text(
+                              "Apply Now",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                primary: primaryColor,
+                                padding: const EdgeInsets.fromLTRB(50, 15, 50, 15)),
+                          ),
+                        );
+                        })
+                      
                       ],
                     ),
                   ],

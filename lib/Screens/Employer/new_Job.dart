@@ -16,22 +16,33 @@ class _New_jobState extends State<New_job> {
   final desc = TextEditingController();
 
   var currentUser = FirebaseAuth.instance.currentUser!.uid;
+
   var userName;
   var name;
+  var chosen_value;
+  List<String> fields = [
+    'Education',
+    'Science & Technology',
+    'architecture and engineering',
+    'Business, management & administration',
+    'arts, culture & entertainment',
+    'Communications',
+    'Health & Medicine',
+    'Law & public policy'
+  ];
 
   CollectionReference job = FirebaseFirestore.instance
       .collection('users')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection('jobs');
   var jobs = FirebaseFirestore.instance.collection('job');
- 
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
-              title: Text('Add Job'),
+              title: const Text('Add Job'),
               backgroundColor: primaryColor,
             ),
             body: SingleChildScrollView(
@@ -40,10 +51,10 @@ class _New_jobState extends State<New_job> {
                     key: formKey,
                     child: Column(children: [
                       Padding(
-                        padding: EdgeInsets.all(12),
+                        padding: const EdgeInsets.all(12),
                         child: TextFormField(
                           controller: title,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: 'Job Title',
                               border: OutlineInputBorder()),
                           validator: (value) {
@@ -53,12 +64,35 @@ class _New_jobState extends State<New_job> {
                           },
                         ),
                       ),
+                      Container(
+                        height: 60,
+                        margin: const EdgeInsets.symmetric(horizontal: 12),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: DropdownButton(
+                              items: fields.map((i) {
+                                return DropdownMenuItem(
+                                    value: i, child: Text(i));
+                              }).toList(),
+                              isExpanded: true,
+                              hint: const Text('Select the job Field'),
+                              value: chosen_value,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  chosen_value = newValue;
+                                });
+                              }),
+                        ),
+                      ),
                       Padding(
-                        padding: EdgeInsets.all(12),
+                        padding: const EdgeInsets.all(12),
                         child: TextFormField(
                           maxLines: 8,
                           controller: desc,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: 'Job Description',
                               border: OutlineInputBorder()),
                           validator: (value) {
@@ -73,7 +107,7 @@ class _New_jobState extends State<New_job> {
                       ),
                     ])),
                 Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: const EdgeInsets.only(top: 30),
                   child: FutureBuilder(
                       future: _userdata(),
                       builder: (context, snapshot) {
@@ -93,6 +127,7 @@ class _New_jobState extends State<New_job> {
                               }
                               job.doc().set({
                                 'job_title': title.text,
+                                'Field': chosen_value.toString(),
                                 'job_desc': desc.text
                               });
                               jobs.doc().set({
@@ -101,12 +136,13 @@ class _New_jobState extends State<New_job> {
                                     TextEditingController(text: userName).text,
                                 'job_title': title.text,
                                 'job_desc': desc.text,
+                                'Field': chosen_value.toString(),
                                 'SearchIndex': indexList
                               });
                               Navigator.pop(context);
                             }
                           },
-                          child: Text(
+                          child: const Text(
                             'Save',
                             style: TextStyle(
                               fontSize: 24,
@@ -114,7 +150,7 @@ class _New_jobState extends State<New_job> {
                           ),
                           style: ElevatedButton.styleFrom(
                             primary: primaryColor,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 30, vertical: 10),
                           ),
                         );
@@ -132,8 +168,5 @@ class _New_jobState extends State<New_job> {
         .then((value) => {
               userName = value['company_name'],
             });
-  }
-  updateJob(){
-
   }
 }

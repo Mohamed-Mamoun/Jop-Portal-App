@@ -17,27 +17,27 @@ class _j_bottomnavbarState extends State<j_bottomnavbar> {
   @override
   Widget build(BuildContext context) {
     final _TabPages = <Widget>[
-      Home(),
-      Profile(),
-      tabbar(),
+       Tabbar(),
+      const Profile(),
+      const tabbar(),
     ];
 
     final _bottomNavItems = <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
+      const BottomNavigationBarItem(
           icon: Icon(
             Icons.home,
             color: primaryColor,
             size: 30,
           ),
           label: 'Home'),
-      BottomNavigationBarItem(
+      const BottomNavigationBarItem(
           icon: Icon(
             Icons.account_circle,
             color: primaryColor,
             size: 30,
           ),
           label: 'Profile'),
-      BottomNavigationBarItem(
+      const BottomNavigationBarItem(
           icon: Icon(
             Icons.laptop_chromebook,
             color: primaryColor,

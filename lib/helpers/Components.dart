@@ -18,7 +18,7 @@ var fileName;
 var imageName;
 
   _userdata() async {
-    var currentUser = await auth.currentUser;
+    var currentUser = auth.currentUser;
     if (currentUser != null) {
       await jobs
           .doc()
@@ -62,7 +62,7 @@ void navigateAndFinish(BuildContext context, page) {
       context, MaterialPageRoute(builder: (context) => page));
 }
 
-Widget defaultButton({
+Widget button({
   double width = double.infinity,
   Color background= primaryColor,
   bool isUpperCase = true,
@@ -77,7 +77,7 @@ Widget defaultButton({
         onPressed:() => function,
         child: Text(
           isUpperCase ? text.toUpperCase() : text,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -88,4 +88,49 @@ Widget defaultButton({
         borderRadius: BorderRadius.circular(radius),
         color: background,
       ),
+    );
+
+  Widget formField({
+  required TextEditingController controller,
+  String? label,
+  String? hint,
+  required TextInputType type,
+  required IconData? prefix,
+  IconData? suffix,
+  String? Function(String?)? validate,
+  Function? onSubmitted,
+  Function? onTap,
+  Function(String)? onChanged,
+  bool isPassword = false,
+  bool isReadOnly = false,
+  Function? suffixPressed,
+  bool? obscureText,
+  double radius = 15.0,
+  Color? fill
+}) =>
+    TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hint,
+        prefixIcon: Icon(prefix,color: Colors.black87),
+        suffixIcon: suffix != null
+            ? IconButton(
+                onPressed: ()=> suffixPressed,
+                icon: Icon(suffix),
+              )
+            : null,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(radius),
+        ),
+      ),
+      keyboardType: type,
+      obscureText: isPassword,
+      // On Submitted Value
+     
+      // On Chang Value
+      onChanged: onChanged,
+      validator: validate,
+      onTap:() => onTap,
+      readOnly: isReadOnly,
     );

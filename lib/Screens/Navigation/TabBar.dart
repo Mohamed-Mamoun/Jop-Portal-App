@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:jop_portal/Screens/JobSeeker/Freelancing.dart';
 import 'package:jop_portal/Screens/JobSeeker/Job%20Fields/Art.dart';
 import 'package:jop_portal/Screens/JobSeeker/Job%20Fields/Business.dart';
@@ -63,60 +62,53 @@ class _TabbarState extends State<Tabbar> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: primaryColor,
-           title: SizedBox(
-            width: 1000,
-            child: TextField(
-              decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  filled: true,
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    size: 30,
-                  ),
-                  hintText: 'Search for a Job',
-                  hintStyle: GoogleFonts.lato(
-                    textStyle: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 20,
-                    ),
-                  )),
-              onChanged: (value) {
-                setState(() {
-                  searchkey = value;
-                });
-              },
-            ),
-          ),
-            bottom:  const TabBar(
+            title: const TabBar(
               isScrollable: true,
               indicatorColor: Colors.white,
               unselectedLabelColor: Colors.white,
               indicatorWeight: 5,
               tabs: [
-                Tab(text: 'All',),
-                Tab(child: Text('Education'),),
-                Tab(child: Text('Software'),),
-                Tab(child: Text('Engineering'),),
-                Tab(child: Text('Business & Administration'),),
-                Tab(child: Text('Law'),),
-                Tab(child: Text('Communication'),),
-                Tab(child: Text('Medicine'),),
-                Tab(child: Text('Arts'),),
-               
+                Tab(
+                  text: 'All',
+                ),
+                Tab(
+                  child: Text('Education'),
+                ),
+                Tab(
+                  child: Text('Software'),
+                ),
+                Tab(
+                  child: Text('Engineering'),
+                ),
+                Tab(
+                  child: Text('Business & Administration'),
+                ),
+                Tab(
+                  child: Text('Law'),
+                ),
+                Tab(
+                  child: Text('Communication'),
+                ),
+                Tab(
+                  child: Text('Medicine'),
+                ),
+                Tab(
+                  child: Text('Arts'),
+                ),
               ],
-            ),
+            ), 
+            
           ),
-          body: const TabBarView(children: [
-          Home(),
-          Education(),
-          Tech(),
-          Engineering(),
-          Business(),
-          Law(),
-          Communication(),
-          Medicine(),
-          Art()
+          body:  const TabBarView(children: [
+            Home(),
+            Education(),
+            Tech(),
+            Engineering(),
+            Business(),
+            Law(),
+            Communication(),
+            Medicine(),
+            Art()
           ]),
         ));
   }

@@ -27,7 +27,7 @@ class _ArtState extends State<Art> {
           stream: (searchkey == null || searchkey.trim() == "")
               ? FirebaseFirestore.instance
                   .collection('job')
-                  .where('Field', isEqualTo: 'Education')
+                  .where('Field', isEqualTo: 'Arts')
                   .snapshots()
               : FirebaseFirestore.instance
                   .collection('job')

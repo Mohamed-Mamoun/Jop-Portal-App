@@ -28,6 +28,35 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: primaryColor,
+          automaticallyImplyLeading: false,
+          title:  SizedBox(
+              width: 1000,
+              child: TextField(
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    prefixIcon: const Icon(
+                      Icons.search,
+                      size: 30,
+                    ),
+                    hintText: 'Search for a Job',
+                    hintStyle: GoogleFonts.lato(
+                      textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                      ),
+                    )),
+                onChanged: (value) {
+                  setState(() {
+                    searchkey = value;
+                  });
+                    
+                },
+              ),
+            ),),
         backgroundColor: primaryColor,
         body: StreamBuilder<QuerySnapshot>(
           stream: (searchkey == null || searchkey.trim() == "")

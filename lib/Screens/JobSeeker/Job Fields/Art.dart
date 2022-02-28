@@ -22,12 +22,41 @@ class _ArtState extends State<Art> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: primaryColor,
+          automaticallyImplyLeading: false,
+          title: SizedBox(
+            width: 1000,
+            child: TextField(
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    size: 30,
+                  ),
+                  hintText: 'Search for a Job',
+                  hintStyle: GoogleFonts.lato(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                    ),
+                  )),
+              onChanged: (value) {
+                setState(() {
+                  searchkey = value;
+                });
+              },
+            ),
+          ),
+        ),
         backgroundColor: primaryColor,
         body: StreamBuilder<QuerySnapshot>(
           stream: (searchkey == null || searchkey.trim() == "")
               ? FirebaseFirestore.instance
                   .collection('job')
-                  .where('Field', isEqualTo: 'Arts')
+                  .where('Field', isEqualTo: 'arts, culture & entertainment')
                   .snapshots()
               : FirebaseFirestore.instance
                   .collection('job')
@@ -36,6 +65,22 @@ class _ArtState extends State<Art> {
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return const Text('Something went wrong');
+            }
+            if (snapshot.hasError) {
+              return Center(
+                child: Container(
+                  height: 50,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Text(
+                    'There is no Jobs in This Field',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                  ),
+                ),
+              );
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(

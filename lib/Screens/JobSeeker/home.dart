@@ -169,7 +169,7 @@ class _HomeState extends State<Home> {
                         width: 100,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(imgpath),
+                            image: AssetImage(imgpath),
                             fit: BoxFit.fitWidth,
                           ),
                           borderRadius: const BorderRadius.all(

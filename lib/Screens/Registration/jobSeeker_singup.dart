@@ -32,7 +32,7 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
         title: Text(
           'SignUp',
           style: GoogleFonts.lato(
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
                 color: Colors.white,
                 fontSize: 22,
                 fontStyle: FontStyle.italic,
@@ -43,19 +43,20 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              // ignore: prefer_const_literals_to_create_immutables
               children: [
-                Text(
+                const Text(
                   'Create an Account as a Job Seeker',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             // ********** Full Name *********
@@ -76,9 +77,9 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
                             }
                           },
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.person),
+                              prefixIcon: const Icon(Icons.person),
                               hintText: 'Full Name',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 18,
                               ),
@@ -104,9 +105,9 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
                             }
                           },
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.email),
+                              prefixIcon: const Icon(Icons.email),
                               hintText: ' Email',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 18,
                               ),
@@ -128,9 +129,9 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
                             }
                           },
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.phone),
+                              prefixIcon: const Icon(Icons.phone),
                               hintText: 'Phone Number',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 18,
                               ),
@@ -150,9 +151,9 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
                             }
                           },
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock),
+                              prefixIcon: const Icon(Icons.lock),
                               hintText: 'Password',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 18,
                               ),
@@ -172,9 +173,9 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
                             }
                           },
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock),
+                              prefixIcon: const Icon(Icons.lock),
                               hintText: 'Confirm Password',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 18,
                               ),
@@ -183,7 +184,7 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
                         )),
                   ],
                 )),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             ElevatedButton(
@@ -200,7 +201,7 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
               child: Text(
                 'SignUp',
                 style: GoogleFonts.lato(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                       color: Colors.white,
                       fontSize: 22,
                       fontStyle: FontStyle.italic),
@@ -208,7 +209,7 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
               ),
               style: ElevatedButton.styleFrom(
                   primary: primaryColor,
-                  padding: EdgeInsets.fromLTRB(138, 10, 138, 10)),
+                  padding: const EdgeInsets.fromLTRB(138, 10, 138, 10)),
             ),
           ],
         ),

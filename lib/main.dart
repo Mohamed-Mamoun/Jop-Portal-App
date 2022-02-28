@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
           'assests/output-onlinepngtools.png',
           width: 500,
         ),
-        nextScreen: OnBoardingScreen(),
+        nextScreen: const OnBoardingScreen(),
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: Colors.white,
         duration: 3000,

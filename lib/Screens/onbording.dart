@@ -48,16 +48,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   ];
 
   bool isLast = false;
-  // void submit() {
-  //   CacheHelper.saveData(
-  //     key: 'onBoarding',
-  //     value: true,
-  //   ).then((value) {
-  //     if (value) {
-  //       navigatAndFinish(context, ShopLoginScreen());
-  //     }
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +58,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         elevation: 0.0,
         actions: [
           TextButton(onPressed: (){
-              navigateTo(context, First_Page());
+              navigateTo(context, const First_Page());
           }, child: Text('SKIP'),
           )
         ],

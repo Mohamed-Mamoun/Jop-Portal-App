@@ -30,7 +30,7 @@ class _Employer_SingUpState extends State<Employer_SingUp> {
         title: Text(
           'SignUp',
           style: GoogleFonts.lato(
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
                 color: Colors.white,
                 fontSize: 22,
                 fontStyle: FontStyle.italic,
@@ -41,19 +41,20 @@ class _Employer_SingUpState extends State<Employer_SingUp> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              // ignore: prefer_const_literals_to_create_immutables
               children: [
-                Text(
+                 const Text(
                   'Create an Account as Employer',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             // ********** Full Name *********
@@ -74,9 +75,9 @@ class _Employer_SingUpState extends State<Employer_SingUp> {
                             }
                           },
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.person),
+                              prefixIcon: const Icon(Icons.person),
                               hintText: 'Company Name',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 18,
                               ),
@@ -102,9 +103,9 @@ class _Employer_SingUpState extends State<Employer_SingUp> {
                             }
                           },
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.email),
+                              prefixIcon: const Icon(Icons.email),
                               hintText: 'Company Email',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 18,
                               ),
@@ -126,9 +127,9 @@ class _Employer_SingUpState extends State<Employer_SingUp> {
                             }
                           },
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.home),
+                              prefixIcon: const Icon(Icons.home),
                               hintText: 'Company Industry',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 18,
                               ),
@@ -149,9 +150,9 @@ class _Employer_SingUpState extends State<Employer_SingUp> {
                           },
                           obscureText: true,
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock),
+                              prefixIcon: const Icon(Icons.lock),
                               hintText: 'Password',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 18,
                               ),
@@ -171,9 +172,9 @@ class _Employer_SingUpState extends State<Employer_SingUp> {
                             }
                           },
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock),
+                              prefixIcon: const Icon(Icons.lock),
                               hintText: 'Confirm Password',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 18,
                               ),
@@ -182,7 +183,7 @@ class _Employer_SingUpState extends State<Employer_SingUp> {
                         )),
                   ],
                 )),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             ElevatedButton(
@@ -198,7 +199,7 @@ class _Employer_SingUpState extends State<Employer_SingUp> {
               child: Text(
                 'SignUp',
                 style: GoogleFonts.lato(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                       color: Colors.white,
                       fontSize: 22,
                       fontStyle: FontStyle.italic),
@@ -208,7 +209,7 @@ class _Employer_SingUpState extends State<Employer_SingUp> {
                   primary: primaryColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50)),
-                  padding: EdgeInsets.fromLTRB(138, 10, 138, 10)),
+                  padding: const EdgeInsets.fromLTRB(138, 10, 138, 10)),
             ),
           ],
         ),

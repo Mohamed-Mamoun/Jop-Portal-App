@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:jop_portal/Screens/Navigation/E_bottomnav.dart';
 import 'package:jop_portal/Screens/Navigation/J_bottomnavbar.dart';
 import 'package:jop_portal/Screens/Registration/login.dart';
+import 'package:jop_portal/Screens/Registration/verifyEmail.dart';
 import 'package:jop_portal/helpers/Components.dart';
 
 class Auth_Service {
@@ -28,9 +29,9 @@ class Auth_Service {
         await (firestore.collection('users').doc(value.user!.uid).get());
     var data = users.data();
     if (data!['role'] == 'employer') {
-      navigateAndFinish(context, E_Bottumnav());
+      navigateAndFinish(context, const E_Bottumnav());
     } else {
-      navigateAndFinish(context, j_bottomnavbar());
+      navigateAndFinish(context, const j_bottomnavbar());
     }
   }
 
@@ -53,7 +54,7 @@ class Auth_Service {
                 'phone_number': number.text,
                 'role': 'job_seeker'
               }),
-              navigateTo(context, Login_page())
+              navigateTo(context, const VerifyEmail())
             });
   }
 
@@ -75,7 +76,7 @@ class Auth_Service {
                 'company_industry': indus.text,
                 'role': 'employer'
               }),
-              navigateTo(context, Login_page())
+              navigateTo(context, const Login_page())
             });
   }
 

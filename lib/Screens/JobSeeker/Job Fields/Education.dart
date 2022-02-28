@@ -5,27 +5,59 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jop_portal/helpers/Styles/style.dart';
 
 class Education extends StatefulWidget {
-  const Education({ Key? key }) : super(key: key);
+  const Education({Key? key}) : super(key: key);
 
   @override
   State<Education> createState() => _EducationState();
 }
 
 class _EducationState extends State<Education> {
-String searchkey = '';
-String userEmail='';
-  String userName='';
-  String userNumber='';
-var applicant = FirebaseFirestore.instance.collection('Applicant');
+  String searchkey = '';
+  String userEmail = '';
+  String userName = '';
+  String userNumber = '';
+  var applicant = FirebaseFirestore.instance.collection('Applicant');
   FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: primaryColor,
+          automaticallyImplyLeading: false,
+          title: SizedBox(
+            width: 1000,
+            child: TextField(
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    size: 30,
+                  ),
+                  hintText: 'Search for a Job',
+                  hintStyle: GoogleFonts.lato(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
+                    ),
+                  )),
+              onChanged: (value) {
+                setState(() {
+                  searchkey = value;
+                });
+              },
+            ),
+          ),
+        ),
         backgroundColor: primaryColor,
         body: StreamBuilder<QuerySnapshot>(
           stream: (searchkey == null || searchkey.trim() == "")
-              ? FirebaseFirestore.instance.collection('job').where('Field',isEqualTo: 'Education').snapshots()
+              ? FirebaseFirestore.instance
+                  .collection('job')
+                  .where('Field', isEqualTo: 'Education')
+                  .snapshots()
               : FirebaseFirestore.instance
                   .collection('job')
                   .where('SearchIndex', arrayContains: searchkey)
@@ -37,7 +69,7 @@ var applicant = FirebaseFirestore.instance.collection('Applicant');
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                   child: CircularProgressIndicator(
-                    color: Colors.white,
+                color: Colors.white,
                 strokeWidth: 6,
               ));
             }
@@ -51,7 +83,6 @@ var applicant = FirebaseFirestore.instance.collection('Applicant');
                   child: ListView.builder(
                       itemCount: data.size,
                       itemBuilder: (context, index) {
-                        
                         return _jobs(
                             data.docs[index]['name'],
                             data.docs[index]['job_title'],
@@ -64,13 +95,11 @@ var applicant = FirebaseFirestore.instance.collection('Applicant');
             );
           },
         ),
-
-      
       ),
     );
   }
 
-    _userdata() async {
+  _userdata() async {
     var currentUser = await auth.currentUser;
     if (currentUser != null) {
       await FirebaseFirestore.instance
@@ -85,8 +114,13 @@ var applicant = FirebaseFirestore.instance.collection('Applicant');
     }
   }
 
-  _jobs(String company_name, String job_title, String imgpath,String id,
-      String job_description,) {
+  _jobs(
+    String company_name,
+    String job_title,
+    String imgpath,
+    String id,
+    String job_description,
+  ) {
     Job_description(BuildContext context) {
       Navigator.push(
         context,
@@ -115,7 +149,7 @@ var applicant = FirebaseFirestore.instance.collection('Applicant');
               ),
             ),
             body: Container(
-              decoration:  const BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50),
@@ -193,36 +227,36 @@ var applicant = FirebaseFirestore.instance.collection('Applicant');
                           width: 16,
                         ),
                         FutureBuilder(
-                          future: _userdata(),
-                          builder: (context, snapshot){
-                          return   Expanded(
-                          child: ElevatedButton(
-                            onPressed: () async{
-                             await applicant.add({
-                                'id': id,
-                                'Name':company_name,
-                                'title':job_title,
-                                'Applicant_Name':userName,
-                                'Applicant_Email':userEmail,
-                                'Applicant_Number':userNumber
-                              });
-                              Navigator.pop(context);
-                            },
-                            child: const Text(
-                              "Apply Now",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                primary: primaryColor,
-                                padding: const EdgeInsets.fromLTRB(50, 15, 50, 15)),
-                          ),
-                        );
-                        })
-                      
+                            future: _userdata(),
+                            builder: (context, snapshot) {
+                              return Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    await applicant.add({
+                                      'id': id,
+                                      'Name': company_name,
+                                      'title': job_title,
+                                      'Applicant_Name': userName,
+                                      'Applicant_Email': userEmail,
+                                      'Applicant_Number': userNumber
+                                    });
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text(
+                                    "Apply Now",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                      primary: primaryColor,
+                                      padding: const EdgeInsets.fromLTRB(
+                                          50, 15, 50, 15)),
+                                ),
+                              );
+                            })
                       ],
                     ),
                   ],

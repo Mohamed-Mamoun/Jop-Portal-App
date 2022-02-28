@@ -32,6 +32,10 @@ dependencies:
   firebase_storage: ^10.2.6
   image_picker: ^0.8.4+5
   device_preview: ^1.0.0
+  bloc: ^8.0.1
+  flutter_bloc: ^8.0.0
+  conditional_builder: ^1.0.2
+  
 
   
   

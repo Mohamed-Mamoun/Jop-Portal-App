@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:jop_portal/helpers/Styles/style.dart';
 
+
 FirebaseAuth auth = FirebaseAuth.instance;
 File? _image;
 final imagepicker = ImagePicker();
@@ -134,3 +135,4 @@ Widget button({
       onTap:() => onTap,
       readOnly: isReadOnly,
     );
+   

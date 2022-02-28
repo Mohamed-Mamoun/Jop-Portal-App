@@ -30,14 +30,14 @@ class _ApplicantState extends State<Applicant> {
         builder: (context, snapshot) {
           var data = snapshot.requireData;
           if (snapshot.hasError) {
-            return Center(
+            return const Center(
                 child: Text(
               'There are No Applicant Requests',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
             ));
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
                 child: CircularProgressIndicator(
               strokeWidth: 6,
             ));

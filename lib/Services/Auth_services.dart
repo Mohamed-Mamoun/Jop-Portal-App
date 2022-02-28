@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jop_portal/Screens/Navigation/E_bottomnav.dart';
 import 'package:jop_portal/Screens/Navigation/J_bottomnavbar.dart';
-import 'package:jop_portal/Screens/Registration/login.dart';
+import 'package:jop_portal/Screens/Registration/Login/login.dart';
 import 'package:jop_portal/Screens/Registration/verifyEmail.dart';
 import 'package:jop_portal/helpers/Components.dart';
 

@@ -56,9 +56,17 @@ class _j_bottomnavbarState extends State<j_bottomnavbar> {
         });
       },
     );
-    return Scaffold(
-      body: _TabPages[_currentindex],
-      bottomNavigationBar: bottomnavbar,
+    return WillPopScope(
+      onWillPop: () async {
+        const snackbsr =
+            SnackBar(content: Text('Sign Out From Your Profile'));
+        ScaffoldMessenger.of(context).showSnackBar(snackbsr);
+        return false;
+      },
+      child: Scaffold(
+        body: _TabPages[_currentindex],
+        bottomNavigationBar: bottomnavbar,
+      ),
     );
   }
 }

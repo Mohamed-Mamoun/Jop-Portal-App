@@ -6,7 +6,6 @@ import 'package:jop_portal/Screens/Employer/jobs.dart';
 import 'package:jop_portal/Screens/Navigation/TabBar.dart';
 import 'package:jop_portal/helpers/Styles/style.dart';
 
-
 class E_Bottumnav extends StatefulWidget {
   const E_Bottumnav({Key? key}) : super(key: key);
 
@@ -19,18 +18,24 @@ class _E_BottumnavState extends State<E_Bottumnav> {
 
   @override
   Widget build(BuildContext context) {
-    final _TabPages = <Widget>[Jobs(), E_Profile(), tabbar(), Applicant()];
+    final _TabPages = <Widget>[
+      const Jobs(),
+      const E_Profile(),
+      const tabbar(),
+      const Applicant()
+    ];
     final _bottomNavItems = <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-          icon: Icon(Icons.house_outlined, color: primaryColor, size: 30),
+      const BottomNavigationBarItem(
+          icon: const Icon(Icons.house_outlined, color: primaryColor, size: 30),
           label: 'Jobs'),
-      BottomNavigationBarItem(
-          icon: Icon(Icons.account_circle, color: primaryColor, size: 30),
+      const BottomNavigationBarItem(
+          icon: const Icon(Icons.account_circle, color: primaryColor, size: 30),
           label: 'Profile'),
-      BottomNavigationBarItem(
-          icon: Icon(Icons.laptop_chromebook, color: primaryColor, size: 30),
+      const BottomNavigationBarItem(
+          icon: const Icon(Icons.laptop_chromebook,
+              color: primaryColor, size: 30),
           label: 'freelancing'),
-      BottomNavigationBarItem(
+      const BottomNavigationBarItem(
           icon: Icon(Icons.group, color: primaryColor, size: 30),
           label: 'Applicant'),
     ];
@@ -45,9 +50,17 @@ class _E_BottumnavState extends State<E_Bottumnav> {
         });
       },
     );
-    return Scaffold(
-      body: _TabPages[_currentindex],
-      bottomNavigationBar: bottomnavbar,
+    return WillPopScope(
+      onWillPop: () async {
+        const snackbsr =
+            SnackBar(content: Text('Sign Out From Your Profile'));
+        ScaffoldMessenger.of(context).showSnackBar(snackbsr);
+        return false;
+      },
+      child: Scaffold(
+        body: _TabPages[_currentindex],
+        bottomNavigationBar: bottomnavbar,
+      ),
     );
   }
 }

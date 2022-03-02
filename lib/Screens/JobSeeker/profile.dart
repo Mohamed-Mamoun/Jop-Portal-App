@@ -1,8 +1,10 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jop_portal/Screens/Registration/Login/login.dart';
+import 'package:jop_portal/helpers/Components.dart';
 import 'package:jop_portal/helpers/Styles/style.dart';
 
 
@@ -23,12 +25,12 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       backgroundColor: primaryColor,
       body: Padding(
-        padding: EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-                padding: EdgeInsets.only(left: 310),
+                padding: const EdgeInsets.only(left: 310),
                 child: IconButton(
                   onPressed: () async {
                     try {
@@ -36,12 +38,12 @@ class _ProfileState extends State<Profile> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Login_page()));
+                              builder: (context) => const Login_page()));
                     } on FirebaseAuthException catch (e) {
                       print(e);
                     }
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.exit_to_app,
                     size: 40,
                     color: Colors.red,
@@ -58,7 +60,7 @@ class _ProfileState extends State<Profile> {
                     padding: const EdgeInsets.fromLTRB(10, 5, 25, 20),
                     child: IconButton(
                         onPressed: () {},
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.photo_camera,
                           size: 50,
                           color: Colors.black,
@@ -67,7 +69,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
             ),
-            Divider(
+            const Divider(
               height: 60.0,
               color: Colors.black,
               thickness: 1.0,
@@ -75,7 +77,7 @@ class _ProfileState extends State<Profile> {
             Card(
               color: Colors.white,
               child: ListTile(
-                leading: Icon(Icons.person, color: Colors.black),
+                leading: const Icon(Icons.person, color: Colors.black),
                 title: FutureBuilder(
                     future: _userdata(),
                     builder: (context, snapshot) {
@@ -100,13 +102,13 @@ class _ProfileState extends State<Profile> {
                     }),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Card(
               color: Colors.white,
               child: ListTile(
-                leading: Icon(Icons.email, color: Colors.black),
+                leading: const Icon(Icons.email, color: Colors.black),
                 title: FutureBuilder(
                     future: _userdata(),
                     builder: (context, snapshot) {
@@ -130,13 +132,13 @@ class _ProfileState extends State<Profile> {
                     }),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Card(
               color: Colors.white,
               child: ListTile(
-                leading: Icon(Icons.phone, color: Colors.black),
+                leading: const Icon(Icons.phone, color: Colors.black),
                 title: FutureBuilder(
                     future: _userdata(),
                     builder: (context, snapshot) {
@@ -161,6 +163,11 @@ class _ProfileState extends State<Profile> {
                     }),
               ),
             ),
+            const SizedBox(height: 15,),
+            button(
+              vertical: 0,
+              horizontal: 90,
+              function: ()=> filePickMethod(), text: 'Upload CV')
           ],
         ),
       ),

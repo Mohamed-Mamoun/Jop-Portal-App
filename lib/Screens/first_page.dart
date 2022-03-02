@@ -30,7 +30,7 @@ class First_Page extends StatelessWidget {
             Container(
               height: 200, width: 250, margin: EdgeInsets.only(top: 20, left: 80),
               decoration: BoxDecoration( 
-                image: DecorationImage(image: AssetImage('assests/Logo.jpeg'),
+                image: DecorationImage(image: AssetImage('assests/1024_preview_rev_1.png'),
                 fit: BoxFit.cover
                 )
               )

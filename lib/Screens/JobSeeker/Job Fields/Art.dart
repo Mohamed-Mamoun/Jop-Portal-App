@@ -129,7 +129,6 @@ class _ArtState extends State<Art> {
               });
     }
   }
-
   _jobs(
     String company_name,
     String job_title,

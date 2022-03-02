@@ -205,7 +205,11 @@ class _Login_pageState extends State<Login_page> {
                                   padding: const EdgeInsets.fromLTRB(
                                       20, 12, 20, 12)),
                             );
-                          })
+                          },
+                         fallback: (context) => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          )
                     ],
                   ),
                   Padding(

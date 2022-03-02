@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:jop_portal/Screens/Registration/Login/cubit/cubit.dart';
+import 'package:jop_portal/Screens/Registration/Login/cubit/states.dart';
 import 'package:jop_portal/Services/Auth_services.dart';
 import 'package:jop_portal/helpers/Styles/style.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +28,14 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth_Service>(context);
-    return Scaffold(
+    return  BlocProvider(
+      create: (BuildContext context) => LoginCubit(),
+      child: BlocConsumer<LoginCubit, LoginStates>(
+        listener: (context, state) {
+         
+        },
+        builder: (context, state) {
+         return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
         centerTitle: true,
@@ -143,7 +153,8 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
                         padding:
                             const EdgeInsets.only(left: 20, right: 20, top: 12),
                         child: TextFormField(
-                          keyboardType: TextInputType.name,
+                           keyboardType: TextInputType.visiblePassword,
+                          obscureText: LoginCubit.get(context).isPasswordShow,
                           controller: pass,
                           validator: (value) {
                             if (value!.length < 8) {
@@ -151,6 +162,19 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
                             }
                           },
                           decoration: InputDecoration(
+                             suffixIcon:
+                                        Icon(LoginCubit.get(context).suffix) !=
+                                                null
+                                            ? IconButton(
+                                                onPressed: () {
+                                                  LoginCubit.get(context)
+                                                      .changePasswordVisib();
+                                                },
+                                                icon: Icon(
+                                                    LoginCubit.get(context)
+                                                        .suffix),
+                                              )
+                                            : null,
                               prefixIcon: const Icon(Icons.lock),
                               hintText: 'Password',
                               hintStyle: const TextStyle(
@@ -165,7 +189,8 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
                         padding:
                             const EdgeInsets.only(left: 20, right: 20, top: 12),
                         child: TextFormField(
-                          keyboardType: TextInputType.name,
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: LoginCubit.get(context).isPasswordShow,
                           controller: pass2,
                           validator: (value) {
                             if (value != pass) {
@@ -173,6 +198,19 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
                             }
                           },
                           decoration: InputDecoration(
+                             suffixIcon:
+                                        Icon(LoginCubit.get(context).suffix) !=
+                                                null
+                                            ? IconButton(
+                                                onPressed: () {
+                                                  LoginCubit.get(context)
+                                                      .changePasswordVisib();
+                                                },
+                                                icon: Icon(
+                                                    LoginCubit.get(context)
+                                                        .suffix),
+                                              )
+                                            : null,
                               prefixIcon: const Icon(Icons.lock),
                               hintText: 'Confirm Password',
                               hintStyle: const TextStyle(
@@ -213,6 +251,9 @@ class _JobSeeker_SignUpState extends State<JobSeeker_SignUp> {
             ),
           ],
         ),
+      ),
+    );
+              },
       ),
     );
   }

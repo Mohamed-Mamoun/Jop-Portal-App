@@ -69,6 +69,8 @@ class _VerifyEmailState extends State<VerifyEmail> {
                   height: 15,
                 ),
                 button(
+                  horizontal: 0,
+                  vertical: 0,
                     radius: 8,
                     text: 'Resent Email',
                     function: () => sendVerification())

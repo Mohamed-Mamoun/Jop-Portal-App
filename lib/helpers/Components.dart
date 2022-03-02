@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:jop_portal/helpers/Styles/style.dart';
+import 'package:file_picker/file_picker.dart';
 
 
 FirebaseAuth auth = FirebaseAuth.instance;
 File? _image;
 final imagepicker = ImagePicker();
+const filePicker = FilePicker;
 String? downloadUrl;
 CollectionReference users = FirebaseFirestore.instance.collection('users');
 String? userId = FirebaseAuth.instance.currentUser!.uid;
@@ -38,7 +40,13 @@ Future imagePickMethod()async{
    
  }
 }
-
+Future filePickMethod()async{
+  FilePickerResult? result = await FilePicker.platform.pickFiles();
+if(result != null) {
+   File file = File(result.files.single.path.toString());
+} 
+ 
+}
 Future uploudImage()async{
   Reference ref = FirebaseStorage.instance.ref().child('images').child(imageName);
  await ref.putFile(_image!);
@@ -70,8 +78,11 @@ Widget button({
   double radius = 0.0,
   required Function function,
   required String text,
+  required double horizontal,
+  required double vertical 
 }) =>
     Container(
+      margin: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
       width: width,
       height: 50.0,
       child: MaterialButton(

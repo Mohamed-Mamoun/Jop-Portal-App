@@ -21,7 +21,7 @@ class _ApplicantState extends State<Applicant> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Applicant Requests'),
+        title: const Text('Applicant Requests'),
         automaticallyImplyLeading: false,
         backgroundColor: primaryColor,
       ),
@@ -66,12 +66,12 @@ class _ApplicantState extends State<Applicant> {
                    children: [
                      IconButton(onPressed: (){
                        Navigator.pop(context);
-                     }, icon: Icon(Icons.arrow_back_ios),
+                     }, icon: const Icon(Icons.arrow_back_ios),
                      color: Colors.white,
                      )
                    ],
                  ),
-                 SizedBox(
+                 const SizedBox(
                    height: 100,
                  ),
                   Padding(
@@ -79,7 +79,7 @@ class _ApplicantState extends State<Applicant> {
                     child: Card(
                 color: Colors.white,
                 child: ListTile(
-                    leading: Icon(Icons.person, color: Colors.black),
+                    leading: const Icon(Icons.person, color: Colors.black),
                     title:Text(applicant_name,
                     style: GoogleFonts.lato(
                               fontSize: 24,
@@ -91,7 +91,7 @@ class _ApplicantState extends State<Applicant> {
                 ),
               ),
                   ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Padding(
@@ -99,7 +99,7 @@ class _ApplicantState extends State<Applicant> {
                 child: Card(
                   color: Colors.white,
                   child: ListTile(
-                    leading: Icon(Icons.email, color: Colors.black),
+                    leading: const Icon(Icons.email, color: Colors.black),
                     title: Text(applicant_email,
                     style: GoogleFonts.lato(
                               fontSize: 24,
@@ -111,7 +111,7 @@ class _ApplicantState extends State<Applicant> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Padding(
@@ -119,7 +119,7 @@ class _ApplicantState extends State<Applicant> {
                 child: Card(
                   color: Colors.white,
                   child: ListTile(
-                    leading: Icon(Icons.phone, color: Colors.black),
+                    leading: const Icon(Icons.phone, color: Colors.black),
                     title: Text(applicant_number,
                     style: GoogleFonts.lato(
                               fontSize: 24,
@@ -153,7 +153,7 @@ class _ApplicantState extends State<Applicant> {
               BoxShadow(
                 color: Colors.grey.shade800,
                 blurRadius: 8,
-                offset: Offset(
+                offset: const Offset(
                   5,5
                 )
                 
@@ -169,13 +169,13 @@ class _ApplicantState extends State<Applicant> {
                   Text(
                   '   '+applicant_name,
                     style: GoogleFonts.notoSans(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 18)),
                   ),
                   Text(
                     '   '+job_title,
                     style: GoogleFonts.notoSans(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 18)),
                   ),
                 ],

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jop_portal">
    <application
-        android:label="jop_portal"
+        android:label="Job Portal"
         android:icon="@mipmap/ic_launcher">
        
         <activity

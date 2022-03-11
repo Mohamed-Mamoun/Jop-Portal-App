@@ -8,6 +8,7 @@ import 'package:jop_portal/helpers/Styles/style.dart';
 class Applicant extends StatefulWidget {
   const Applicant({Key? key}) : super(key: key);
 
+
   @override
   _ApplicantState createState() => _ApplicantState();
 }
@@ -19,6 +20,7 @@ class _ApplicantState extends State<Applicant> {
       .snapshots();
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Applicant Requests'),
@@ -35,12 +37,16 @@ class _ApplicantState extends State<Applicant> {
               'There are No Applicant Requests',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
             ));
+          } 
+          if(!snapshot.hasData){
+            return const Text('no data');
           }
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.connectionState == ConnectionState.none) {
             return const Center(
                 child: CircularProgressIndicator(
               strokeWidth: 6,
             ));
+           
           }
           return ListView.builder(
               itemCount: data.size,

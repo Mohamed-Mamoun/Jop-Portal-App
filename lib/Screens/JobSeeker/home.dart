@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jop_portal/helpers/Components.dart';
 import 'package:jop_portal/helpers/Styles/style.dart';
 
 class Home extends StatefulWidget {
@@ -12,17 +18,39 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  UploadTask? task;
   var employerName;
   var docid;
+  final formKey = GlobalKey<FormState>();
   String userEmail = '';
   String userName = '';
   String userNumber = '';
-
+  var email = TextEditingController();
   var applicant = FirebaseFirestore.instance.collection('Applicant');
   FirebaseAuth auth = FirebaseAuth.instance;
   Stream<QuerySnapshot> jobs =
       FirebaseFirestore.instance.collection('job').snapshots();
   String searchkey = '';
+  var result;
+  File? file;
+  var url;
+
+  selectFile() async {
+    result = await FilePicker.platform.pickFiles();
+    final path = result.files.single.path!;
+    setState(() {
+      file = File(path);
+    });
+  }
+
+  uploadFile() async {
+    String filename = file!.path.split('/').last;
+    final destination = 'files/$filename';
+    final ref = FirebaseStorage.instance.ref(destination);
+    task = ref.putFile(file!);
+   var snapshot = await task!.whenComplete(() => {});
+    url = await snapshot.ref.getDownloadURL();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,32 +59,32 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           backgroundColor: primaryColor,
           automaticallyImplyLeading: false,
-          title:  SizedBox(
-              width: 1000,
-              child: TextField(
-                decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      size: 30,
+          title: SizedBox(
+            width: 1000,
+            child: TextField(
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    size: 30,
+                  ),
+                  hintText: 'Search for a Job',
+                  hintStyle: GoogleFonts.lato(
+                    textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20,
                     ),
-                    hintText: 'Search for a Job',
-                    hintStyle: GoogleFonts.lato(
-                      textStyle: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 20,
-                      ),
-                    )),
-                onChanged: (value) {
-                  setState(() {
-                    searchkey = value;
-                  });
-                    
-                },
-              ),
-            ),),
+                  )),
+              onChanged: (value) {
+                setState(() {
+                  searchkey = value;
+                });
+              },
+            ),
+          ),
+        ),
         backgroundColor: primaryColor,
         body: StreamBuilder<QuerySnapshot>(
           stream: (searchkey == null || searchkey.trim() == "")
@@ -125,6 +153,8 @@ class _HomeState extends State<Home> {
     String job_description,
   ) {
     Job_description(BuildContext context) {
+      String file_Name =
+          file != null ? file!.path.split('/').last : 'No File Selected';
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -143,6 +173,7 @@ class _HomeState extends State<Home> {
               leading: GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
+                  file_Name = 'No File Selected';
                 },
                 child: const Icon(
                   Icons.arrow_back_ios,
@@ -234,16 +265,145 @@ class _HomeState extends State<Home> {
                             builder: (context, snapshot) {
                               return Expanded(
                                 child: ElevatedButton(
-                                  onPressed: () async {
-                                    await applicant.add({
-                                      'id': id,
-                                      'Name': company_name,
-                                      'title': job_title,
-                                      'Applicant_Name': userName,
-                                      'Applicant_Email': userEmail,
-                                      'Applicant_Number': userNumber
-                                    });
-                                    Navigator.pop(context);
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return WillPopScope(
+                                            onWillPop: () async {
+                                              setState(() {
+                                                file_Name = 'No File Selected';
+                                              });
+                                              return true;
+                                            },
+                                            child: AlertDialog(
+                                              content: Container(
+                                                height: 300,
+                                                width: 300,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    const Text(
+                                                      'Applying Form',
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w700),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Form(
+                                                        key: formKey,
+                                                        child: Column(
+                                                          children: [
+                                                            TextFormField(
+                                                              validator:
+                                                                  (value) {
+                                                                if (value!
+                                                                    .isEmpty) {
+                                                                  return "Please Enter Your Email address";
+                                                                }
+                                                                if (!RegExp(
+                                                                        r"^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$")
+                                                                    .hasMatch(
+                                                                        value)) {
+                                                                  return 'Please Enter Correct Email';
+                                                                }
+                                                              },
+                                                              controller: email,
+                                                              decoration: const InputDecoration(
+                                                                  prefixIcon:
+                                                                      Icon(Icons
+                                                                          .email),
+                                                                  labelText:
+                                                                      'Email Address'),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 15,
+                                                            ),
+                                                            ElevatedButton(
+                                                                onPressed: () {
+                                                                  selectFile();
+                                                                  if (file !=
+                                                                      null) {
+                                                                    setState(
+                                                                        () {
+                                                                      file_Name =
+                                                                          file!
+                                                                              .path;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                style: ElevatedButton
+                                                                    .styleFrom(
+                                                                        primary:
+                                                                            Colors
+                                                                                .white),
+                                                                child:
+                                                                    const Text(
+                                                                  'Upload CV',
+                                                                  style: TextStyle(
+                                                                      color:
+                                                                          primaryColor,
+                                                                      fontSize:
+                                                                          18,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                            Text('$file_Name'),
+                                                            const SizedBox(
+                                                              height: 40,
+                                                            ),
+                                                            ElevatedButton(
+                                                                onPressed:
+                                                                    () async {
+                                                                  await uploadFile();
+                                                                  await applicant
+                                                                      .add({
+                                                                    'id': id,
+                                                                    'Name':
+                                                                        company_name,
+                                                                    'title':
+                                                                        job_title,
+                                                                    'Applicant_Name':
+                                                                        userName,
+                                                                    'Applicant_Email':
+                                                                        userEmail,
+                                                                    'Applicant_Number':
+                                                                        userNumber,
+                                                                    'Cv':url.toString()
+                                                                  });
+                                                                },
+                                                                style: ElevatedButton.styleFrom(
+                                                                    primary:
+                                                                        primaryColor,
+                                                                    padding: const EdgeInsets
+                                                                            .symmetric(
+                                                                        horizontal:
+                                                                            30,
+                                                                        vertical:
+                                                                            10)),
+                                                                child:
+                                                                    const Text(
+                                                                  'Submit',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          20,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ))
+                                                          ],
+                                                        ))
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        });
                                   },
                                   child: const Text(
                                     "Apply Now",
@@ -316,4 +476,6 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
+  basename(String path) {}
 }

@@ -28,22 +28,22 @@ class _E_ProfileState extends State<E_Profile> {
     return Scaffold(
       backgroundColor: primaryColor,
       body: Padding(
-        padding: EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 0.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-                padding: EdgeInsets.only(left: 340, top: 5),
+                padding: const EdgeInsets.only(left: 340, top: 5),
                 child: IconButton(
                   onPressed: () async {
                     try {
                       await auth.signOut();
-                     navigateAndFinish(context, Login_page());
+                     navigateAndFinish(context, const Login_page());
                     } on FirebaseAuthException catch (e) {
                       print(e);
                     }
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.exit_to_app,
                     size: 40,
                     color: Colors.red,
@@ -58,7 +58,7 @@ class _E_ProfileState extends State<E_Profile> {
                       height: 130,
                       width: 130,
                       child: CircleAvatar(
-                        child: CircularProgressIndicator(
+                        child: const CircularProgressIndicator(
                           color: Colors.black,
                         ),
                         backgroundColor: Colors.grey.shade200,
@@ -71,7 +71,7 @@ class _E_ProfileState extends State<E_Profile> {
                           height: 130,
                           width: 130,
                           child: CircleAvatar(
-                            child: Icon(
+                            child: const Icon(
                               Icons.person,
                               size: 110,
                               color: Colors.black,
@@ -92,7 +92,7 @@ class _E_ProfileState extends State<E_Profile> {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Row(
@@ -101,9 +101,9 @@ class _E_ProfileState extends State<E_Profile> {
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: secondaryColor),
                     onPressed: () => imagePickMethod(),
-                    child: Text(
+                    child: const Text(
                       'Select Image',
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: primaryColor,
                           fontWeight: FontWeight.w700,
                           fontSize: 18),
@@ -111,7 +111,7 @@ class _E_ProfileState extends State<E_Profile> {
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: secondaryColor),
                     onPressed: () => uploudImage(),
-                    child: Text(
+                    child: const Text(
                       'Uploud Image',
                       style: TextStyle(
                           color: primaryColor,
@@ -120,7 +120,7 @@ class _E_ProfileState extends State<E_Profile> {
                     )),
               ],
             ),
-            Divider(
+            const Divider(
               height: 60.0,
               color: Colors.black,
               thickness: 1.0,
@@ -128,7 +128,7 @@ class _E_ProfileState extends State<E_Profile> {
             Card(
               color: Colors.white,
               child: ListTile(
-                leading: Icon(Icons.person, color: Colors.black),
+                leading: const Icon(Icons.person, color: Colors.black),
                 title: FutureBuilder(
                     future: _userdata(),
                     builder: (context, snapshot) {
@@ -153,13 +153,13 @@ class _E_ProfileState extends State<E_Profile> {
                     }),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Card(
               color: Colors.white,
               child: ListTile(
-                leading: Icon(Icons.email, color: Colors.black),
+                leading: const Icon(Icons.email, color: Colors.black),
                 title: FutureBuilder(
                     future: _userdata(),
                     builder: (context, snapshot) {
@@ -183,13 +183,13 @@ class _E_ProfileState extends State<E_Profile> {
                     }),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Card(
               color: Colors.white,
               child: ListTile(
-                leading: Icon(Icons.home, color: Colors.black),
+                leading: const Icon(Icons.home, color: Colors.black),
                 title: FutureBuilder(
                     future: _userdata(),
                     builder: (context, snapshot) {

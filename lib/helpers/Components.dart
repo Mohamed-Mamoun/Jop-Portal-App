@@ -17,7 +17,7 @@ CollectionReference users = FirebaseFirestore.instance.collection('users');
 String? userId = FirebaseAuth.instance.currentUser!.uid;
 var jobs = FirebaseFirestore.instance.collection('job');
 var id;
-var fileName;
+
 var imageName;
 
   _userdata() async {

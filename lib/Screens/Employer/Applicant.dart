@@ -51,13 +51,13 @@ class _ApplicantState extends State<Applicant> {
           return ListView.builder(
               itemCount: data.size,
               itemBuilder: (context, index) {
-                return  _jobs(data.docs[index]['title'], data.docs[index]['Applicant_Name'], data.docs[index]['Applicant_Email'], data.docs[index]['Applicant_Number']);
+                return  _jobs(data.docs[index]['title'], data.docs[index]['Applicant_Name'], data.docs[index]['Applicant_Email'], data.docs[index]['Applicant_Number'],data.docs[index]['Cv'].toString().split('/').last);
               });
         },
       ),
     );
   }
-  _jobs(String job_title, String applicant_name, String applicant_email,String applicant_number
+  _jobs(String job_title, String applicant_name, String applicant_email,String applicant_number, String applicant_cv
       ) {
     Job_description(BuildContext context) {
       Navigator.push(
@@ -127,6 +127,23 @@ class _ApplicantState extends State<Applicant> {
                   child: ListTile(
                     leading: const Icon(Icons.phone, color: Colors.black),
                     title: Text(applicant_number,
+                    style: GoogleFonts.lato(
+                              fontSize: 24,
+                              color: primaryColor,
+                              letterSpacing: 2.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Card(
+                  color: Colors.white,
+                  child: ListTile(
+                    leading: const Icon(Icons.phone, color: Colors.black),
+                    title: Text(applicant_cv,
                     style: GoogleFonts.lato(
                               fontSize: 24,
                               color: primaryColor,

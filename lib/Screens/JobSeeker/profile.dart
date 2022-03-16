@@ -164,10 +164,7 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             const SizedBox(height: 15,),
-            button(
-              vertical: 0,
-              horizontal: 90,
-              function: ()=> filePickMethod(), text: 'Upload CV')
+           
           ],
         ),
       ),

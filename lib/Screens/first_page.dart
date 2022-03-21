@@ -16,11 +16,11 @@ class First_Page extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Padding(padding: EdgeInsets.only(left: 80),
-            child: Text('Welcome To Job Portal',
+            const Padding(padding: EdgeInsets.only(left: 80),
+            child: const Text('Welcome To Job Portal',
             style: TextStyle(
               fontSize: 24, fontStyle: FontStyle.italic, fontWeight: FontWeight.w500
             ),
@@ -28,64 +28,64 @@ class First_Page extends StatelessWidget {
             ),
             
             Container(
-              height: 200, width: 250, margin: EdgeInsets.only(top: 20, left: 80),
-              decoration: BoxDecoration( 
-                image: DecorationImage(image: AssetImage('assests/1024_preview_rev_1.png'),
+              height: 200, width: 250, margin: const EdgeInsets.only(top: 20, left: 80),
+              decoration: const BoxDecoration( 
+                image: const DecorationImage(image: AssetImage('assests/1024_preview_rev_1.png'),
                 fit: BoxFit.cover
                 )
               )
               ),
             
-            Padding(padding: EdgeInsets.fromLTRB(80, 20, 0, 0),
-            child: Text('SignUp as:',
-               style: TextStyle(
+            const Padding(padding: const EdgeInsets.fromLTRB(80, 20, 0, 0),
+            child: const Text('SignUp as:',
+               style: const TextStyle(
               fontSize: 22, fontStyle: FontStyle.italic, fontWeight: FontWeight.w500
             ),
             ),
             ),
-            Padding(padding: EdgeInsets.fromLTRB(80, 20, 0, 0),
+            Padding(padding: const EdgeInsets.fromLTRB(80, 20, 0, 0),
             child: ElevatedButton(onPressed: (){
-              navigateTo(context, Employer_SingUp());
+              navigateTo(context, const Employer_SingUp());
             
             }, 
             
-            child: Text('Company/Employer',
-            style: TextStyle(fontSize: 22, fontStyle: FontStyle.italic),
+            child: const Text('Company/Employer',
+            style: const TextStyle(fontSize: 22, fontStyle: FontStyle.italic),
             ),
             style: ElevatedButton.styleFrom(
              
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               primary: primaryColor,
              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
             ),
             ),
             ),
-            Padding(padding: EdgeInsets.fromLTRB(80, 20, 0, 0),
-            child: Text('or',
-               style: TextStyle(
+            const Padding(padding: EdgeInsets.fromLTRB(80, 20, 0, 0),
+            child: const Text('or',
+               style: const TextStyle(
               fontSize: 22, fontStyle: FontStyle.italic, fontWeight: FontWeight.w500
             ),
             ),
             ),
-             Padding(padding: EdgeInsets.fromLTRB(80, 20, 0, 0),
+             Padding(padding: const EdgeInsets.fromLTRB(80, 20, 0, 0),
             child: ElevatedButton(onPressed: (){
-            navigateTo(context, JobSeeker_SignUp());
+            navigateTo(context, const JobSeeker_SignUp());
             }, 
-            child: Text('Job Seeker',
-            style: TextStyle(fontSize: 22, fontStyle: FontStyle.italic),
+            child: const Text('Job Seeker',
+            style: const TextStyle(fontSize: 22, fontStyle: FontStyle.italic),
             ),
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.fromLTRB(55, 20, 55, 20),
+              padding: const EdgeInsets.fromLTRB(55, 20, 55, 20),
               primary: primaryColor,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
             ),
             ),
             ),
-            Padding(padding: EdgeInsets.fromLTRB(80, 40, 0, 0),
+            Padding(padding: const EdgeInsets.fromLTRB(80, 40, 0, 0),
             child: TextButton(onPressed: (){
-             navigateTo(context, Login_page());
+             navigateTo(context, const Login_page());
             },
-             child: Text('Already Have an account?',
+             child: const Text('Already Have an account?',
                style: TextStyle(
               fontSize: 22, fontStyle: FontStyle.italic, 
               fontWeight: FontWeight.w500

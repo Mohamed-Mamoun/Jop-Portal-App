@@ -22,10 +22,10 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
           stream: job,
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
              if (snapshot.hasError) {
-                return Text('Something went wrong');
+                return const Text('Something went wrong');
               }
             if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                     child: CircularProgressIndicator(
                   strokeWidth: 6,
                 ));
@@ -35,7 +35,7 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
                ListView.builder(
                  itemCount: data.size,
                  itemBuilder: (context, index){
-                return _jobs(data.docs[index]['Name'], data.docs[index]['title'], '', data.docs[index]['description']);
+                return _jobs(data.docs[index]['Name'], data.docs[index]['title'], 'assests/Logo.jpeg', data.docs[index]['description'],data.docs[index]['price']);
                  }
                  );
           }
@@ -48,7 +48,7 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
     
   }
  _jobs(String company_name, String job_title, String imgpath,
-      String job_description) {
+      String job_description, String price) {
     Job_description(BuildContext context) {
       Navigator.push(
         context,
@@ -61,7 +61,7 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
               centerTitle: true,
               title: Text(
                 company_name,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                 ),
               ),
@@ -69,7 +69,7 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back_ios,
                   size: 20,
                   color: Colors.black,
@@ -77,14 +77,14 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
               ),
             ),
             body: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                  borderRadius:  BorderRadius.only(
                     topLeft: Radius.circular(50),
                     topRight: Radius.circular(50),
                   )),
               child: Padding(
-                padding: EdgeInsets.all(30),
+                padding: const EdgeInsets.all(30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -97,67 +97,67 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
                             image: AssetImage(imgpath),
                             fit: BoxFit.fitWidth,
                           ),
-                          borderRadius: BorderRadius.all(
+                          borderRadius: const BorderRadius.all(
                             Radius.circular(10),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Center(
                       child: Text(
                         job_title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    Divider(
+                    const Divider(
                       height: 30,
                       thickness: 1,
                       color: Colors.black,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       "Job Description:",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     Expanded(
                       child: SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         child: Column(
                           children: [
                             Text(
                               '- ' + job_description,
-                              style: TextStyle(fontSize: 18),
+                              style: const TextStyle(fontSize: 18),
                             ),
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 16,
                         ),
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {},
-                            child: Text(
+                            child: const Text(
                               "Apply Now",
                               style: TextStyle(
                                 fontSize: 18,
@@ -167,7 +167,7 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
                             ),
                             style: ElevatedButton.styleFrom(
                                 primary: primaryColor,
-                                padding: EdgeInsets.fromLTRB(50, 15, 50, 15)),
+                                padding: const EdgeInsets.fromLTRB(50, 15, 50, 15)),
                           ),
                         ),
                       ],
@@ -182,7 +182,7 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
     }
 
     return Padding(
-      padding:  EdgeInsets.fromLTRB(20, 10, 25, 0),
+      padding:  const EdgeInsets.fromLTRB(20, 10, 25, 0),
       child: InkWell(
         onTap: () {
           Job_description(context);
@@ -197,7 +197,7 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
               BoxShadow(
                 color: Colors.grey.shade800,
                 blurRadius: 8,
-                offset: Offset(
+                offset: const Offset(
                   5,5
                 )
                 
@@ -208,7 +208,7 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
               Container(
                 height: 100,
                 width: 100,
-                margin: EdgeInsets.fromLTRB(8, 0, 20, 0),
+                margin: const EdgeInsets.fromLTRB(8, 0, 20, 0),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(image: AssetImage(imgpath))),
@@ -220,15 +220,25 @@ class _Freelancing_jobsState extends State<Freelancing_jobs> {
                   Text(
                     company_name,
                     style: GoogleFonts.notoSans(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 18)),
                   ),
-                  Text(
-                    job_title,
-                    style: GoogleFonts.notoSans(
-                        textStyle: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 18)),
-                  ),
+                
+                      Text(
+                        job_title,
+                        style: GoogleFonts.notoSans(
+                            textStyle: const TextStyle(
+                                fontWeight: FontWeight.w500, fontSize: 18)),
+                      ),
+                   
+                  
+                     Text(
+                        price+" \$ Per Hour",
+                        style: GoogleFonts.notoSans(
+                            textStyle: const TextStyle(
+                                fontWeight: FontWeight.w800, fontSize: 18)),
+                      ),
+                  
                 ],
               ),
             ],

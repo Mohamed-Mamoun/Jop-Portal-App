@@ -103,7 +103,7 @@ class _E_ProfileState extends State<E_Profile> {
                     onPressed: () => imagePickMethod(),
                     child: const Text(
                       'Select Image',
-                      style: const TextStyle(
+                      style:  TextStyle(
                           color: primaryColor,
                           fontWeight: FontWeight.w700,
                           fontSize: 18),

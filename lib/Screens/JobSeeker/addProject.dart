@@ -26,7 +26,7 @@ class _AddProjectState extends State<AddProject> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        title: Text('Add Job'),
+        title: const Text('Add Job'),
         backgroundColor: primaryColor,
       ),
       body: SingleChildScrollView(
@@ -37,7 +37,7 @@ class _AddProjectState extends State<AddProject> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(12),
                       child: TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -45,13 +45,13 @@ class _AddProjectState extends State<AddProject> {
                           }
                         },
                         controller: name,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: 'Employer Name',
                             border: OutlineInputBorder()),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(12),
                       child: TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -59,13 +59,13 @@ class _AddProjectState extends State<AddProject> {
                           }
                         },
                         controller: title,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: 'Job Title',
-                            border: OutlineInputBorder()),
+                            border: const OutlineInputBorder()),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(12),
                       child: TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -74,13 +74,13 @@ class _AddProjectState extends State<AddProject> {
                         },
                         controller: price,
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: 'Price per Hour',
                             border: OutlineInputBorder()),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(12),
                       child: TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -92,7 +92,7 @@ class _AddProjectState extends State<AddProject> {
                         },
                         maxLines: 8,
                         controller: desc,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: 'Job Description',
                             border: OutlineInputBorder()),
                       ),
@@ -100,7 +100,7 @@ class _AddProjectState extends State<AddProject> {
                   ],
                 )),
             Padding(
-              padding: EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.only(top: 30),
               child: ElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
@@ -119,15 +119,15 @@ class _AddProjectState extends State<AddProject> {
                     Navigator.pop(context);
                   }
                 },
-                child: Text(
+                child: const Text(
                   'Save',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 24,
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
                   primary: primaryColor,
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                 ),
               ),
             ),

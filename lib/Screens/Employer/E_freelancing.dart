@@ -16,7 +16,7 @@ class _E_FreelancingState extends State<E_Freelancing> {
       child: Scaffold(
        
         body: Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               color: Colors.grey.shade200,
               child: ListView(
                 children: [
@@ -32,7 +32,7 @@ class _E_FreelancingState extends State<E_Freelancing> {
         floatingActionButton:FloatingActionButton(
           onPressed: (){},
           
-          child: Icon(Icons.add, size: 40,),
+          child: const Icon(Icons.add, size: 40,),
           backgroundColor: primaryColor,
           
           ) ,
@@ -52,7 +52,7 @@ class _E_FreelancingState extends State<E_Freelancing> {
         centerTitle: true,
         title: Text(
           company_name,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
           ),
         ),
@@ -60,7 +60,7 @@ class _E_FreelancingState extends State<E_Freelancing> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back_ios,
             size: 20,
             color: Colors.black,
@@ -68,15 +68,15 @@ class _E_FreelancingState extends State<E_Freelancing> {
         ),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(50),
-            topRight: Radius.circular(50),
+          borderRadius: const BorderRadius.only(
+            topLeft: const Radius.circular(50),
+            topRight: const Radius.circular(50),
           )
         ),
         child: Padding(
-          padding: EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -90,33 +90,33 @@ class _E_FreelancingState extends State<E_Freelancing> {
                       image: AssetImage(imgpath), 
                       fit: BoxFit.fitWidth,
                     ),
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(10),
                     ),
                   ),
                 ),
               ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
            
               Center(
                 child: Text(
                   job_title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
 
-             Divider(
+             const Divider(
                height: 30,
                thickness: 1,
                color: Colors.black,
              ),
-             SizedBox(
+             const SizedBox(
                height: 10,
              ),
-              Text(
+              const Text(
                 "Job Description:",
                 style: TextStyle(
                   fontSize: 18,
@@ -124,36 +124,36 @@ class _E_FreelancingState extends State<E_Freelancing> {
                 ),
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
 
               Expanded(
                 child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
                     children: [
                       Text('- '+job_description, 
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                       ),
                     ],
                   ),
                 ),
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
 
               Row(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
                   Expanded(
                   child: ElevatedButton(
                           onPressed: (){},
-                          child: Text(
+                          child: const Text(
                             "Apply Now",
                             style: TextStyle(
                               fontSize: 18,
@@ -163,7 +163,7 @@ class _E_FreelancingState extends State<E_Freelancing> {
                           ),
                           style: ElevatedButton.styleFrom(
                             primary: primaryColor,
-                            padding: EdgeInsets.fromLTRB(50, 15, 50, 15)
+                            padding: const EdgeInsets.fromLTRB(50, 15, 50, 15)
                           ),
                         ),
                   ),
@@ -199,7 +199,7 @@ class _E_FreelancingState extends State<E_Freelancing> {
                 Container(
                   height: 100,
                   width: 100,
-                  margin: EdgeInsets.fromLTRB(8, 0, 20, 0),
+                  margin: const EdgeInsets.fromLTRB(8, 0, 20, 0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(image: AssetImage(imgpath))
@@ -211,7 +211,7 @@ class _E_FreelancingState extends State<E_Freelancing> {
                 children: [
                   Text(company_name,
                   style: GoogleFonts.notoSans(
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 18
 
@@ -220,7 +220,7 @@ class _E_FreelancingState extends State<E_Freelancing> {
                   ),
                    Text(job_title,
                   style: GoogleFonts.notoSans(
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 18
                     )

@@ -5,14 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jop_portal/helpers/Styles/style.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Applicant extends StatefulWidget {
-  const Applicant({Key? key}) : super(key: key);
+class F_Applicant extends StatefulWidget {
+  const F_Applicant({Key? key}) : super(key: key);
 
   @override
   _ApplicantState createState() => _ApplicantState();
 }
 
-class _ApplicantState extends State<Applicant> {
+class _ApplicantState extends State<F_Applicant> {
   Stream<QuerySnapshot> applicant = FirebaseFirestore.instance
       .collection('Applicant')
       .where('id', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
